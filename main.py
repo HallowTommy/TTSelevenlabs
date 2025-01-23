@@ -71,7 +71,7 @@ def generate_audio():
         # Получение текста из запроса
         data = request.get_json()
         text = data.get("text", "")
-        voice_id = data.get("voice_id", "21m00Tcm4TlvDq8ikWAM")  # Стандартный голос
+        voice_id = data.get("voice_id", "pO3rCaEbT3xVc0h3pPoG")  # Стандартный голос
         logger.debug("Text received: %s", text)
 
         if not text:
