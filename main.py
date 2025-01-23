@@ -91,8 +91,8 @@ def generate_audio():
         payload = {
             "text": text,
             "voice_settings": {
-                "stability": 0.5,
-                "similarity_boost": 0.7
+                "stability": 0.3,
+                "similarity_boost": 0.5
             }
         }
         response = requests.post(f"{TTS_URL}/{voice_id}", json=payload, headers=headers)
