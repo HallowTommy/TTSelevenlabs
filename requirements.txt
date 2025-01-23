@@ -5,3 +5,4 @@ asgiref
 uvicorn
 pydub
 paramiko
+ffmpeg-python
