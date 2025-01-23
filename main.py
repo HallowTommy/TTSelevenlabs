@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, send_file
+from flask import Flask, request, jsonify
 from asgiref.wsgi import WsgiToAsgi  # Адаптер для ASGI
 import requests
 import os
@@ -7,6 +7,7 @@ import paramiko  # Для передачи файлов через SCP
 from pydub import AudioSegment
 from dotenv import load_dotenv
 import logging
+import subprocess
 
 # Настройка логирования
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s [%(levelname)s]: %(message)s')
@@ -14,6 +15,20 @@ logger = logging.getLogger()
 
 # Загрузка переменных окружения из файла .env
 load_dotenv()
+
+# Проверка наличия ffmpeg
+def check_ffmpeg():
+    try:
+        subprocess.run(["ffmpeg", "-version"], check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        logger.info("ffmpeg is installed and ready.")
+    except FileNotFoundError:
+        logger.error("ffmpeg is not installed. Please install ffmpeg to proceed.")
+        raise RuntimeError("ffmpeg is required but not installed.")
+    except subprocess.CalledProcessError as e:
+        logger.error("An error occurred while checking ffmpeg: %s", e)
+        raise RuntimeError("ffmpeg is installed but may not be working correctly.")
+
+check_ffmpeg()  # Проверяем наличие ffmpeg перед обработкой аудио
 
 # Получение API-ключа ElevenLabs
 API_KEY = os.getenv("ELEVENLABS_API_KEY")
