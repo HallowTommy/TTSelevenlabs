@@ -1,1 +1,1 @@
-web: uvicorn main:app --host 0.0.0.0 --port 5000 --no-lifespan
+web: uvicorn main:app --host 0.0.0.0 --port 5000 --lifespan off
