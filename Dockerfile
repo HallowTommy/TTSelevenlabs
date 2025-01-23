@@ -22,4 +22,4 @@ COPY . .
 EXPOSE 5000
 
 # Запускаем приложение
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "5000", "--no-lifespan"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "5000", "--lifespan", "off"]
